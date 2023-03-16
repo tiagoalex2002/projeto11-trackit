@@ -1,37 +1,24 @@
-
-import { useState } from "react"
+import Login from "./Login";
+import Cadastro from "./Cadastro";
+import Histórico from "./Histórico";
+import Hoje from "./Hoje";
+import Hábitos from "./Hábitos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 export default function App() {
+    const [add,setAdd]=useState("none")
+
     return (
         <BrowserRouter>
-           <NavContainer>CINEFLEX</NavContainer>
             <Routes>
                <Route path="/" element={<Login/>}/>
                <Route path="/cadastro" element={<Cadastro/>} />
                <Route path="/historico" element={<Histórico/>}/>
                <Route path="/hoje" element={<Hoje />}/>
-               <Route path="/habitos" elemento={<Hábitos/>}/>
+               <Route path="/habitos" element={<Hábitos add={add} setAdd={setAdd}/>}/>
             </Routes>
             
         </BrowserRouter>
     )
 }
-
-const NavContainer = styled.div`
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #C3CFD9;
-    color: #E8833A;
-    font-family: 'Roboto', sans-serif;
-    font-size: 34px;
-    position: fixed;
-    top: 0;
-    a {
-        text-decoration: none;
-        color: #E8833A;
-    }
-`
