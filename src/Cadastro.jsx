@@ -1,23 +1,36 @@
 import styled from "styled-components"
 import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 
+export default function Cadastro(props){
 
-export default function Cadastro(){
+    const navigate = useNavigate()
+
+    function SignUp(event){
+        event.preventDefault();
+
+        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: props.email, password: props.senha, name: props.nome, image: props.foto})
+        requisition.then(() => navigate("/"))
+    }
     return(
         <Background>
+         <form onSubmit={SignUp}>
             <img src={foto} alt="logo"/>
-            <div><input placeholder="email"/></div>
+            <div><input type="email" required placeholder="email" onChange={e => props.setEmail(e.target.value)}/></div>
             <br></br>
-            <div><input placeholder="senha"/></div>
+            <div><input type="text" required placeholder="senha" onChange={e => props.setSenha(e.target.value)}/></div>
             <br></br>
-            <div><input placeholder="nome"/></div>
+            <div><input type="text" required placeholder="nome" onChange={e => props.setNome(e.target.value)}/></div>
             <br></br>
-            <div><input placeholder="foto"/></div>
+            <div><input type="url" required placeholder="foto" onChange={e => props.setFoto(e.target.value)}/></div>
             <br></br>
-            <Link to="/habitos"><button>Cadastrar</button></Link>
-            <Link to="/cadastro">Já tem uma conta? Faça login!</Link>
+            <button type="submit" data-test="signup-btn">Cadastrar</button>
+         </form>
+            
+            <Link to="/">Já tem uma conta? Faça login!</Link>
             
         </Background>
     )
