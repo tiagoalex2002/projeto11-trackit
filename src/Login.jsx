@@ -1,18 +1,30 @@
 import styled from "styled-components"
 import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
-export default function Login(){
+export default function Login(props){
+
+    const navigate = useNavigate()
+
+    function Subscribe(event){
+        event.preventDefault();
+
+        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: props.email, password: props.senha})
+        requisition.then(() => navigate("/hoje"))
+    }
 
     return(
         <Background>
             <img src={foto} alt="logo"/>
-            <div><input placeholder="email"/></div>
-            <br></br>
-            <div><input placeholder="senha"/></div>
-            <br></br>
-            <Link to="/habitos"><button data-test="login-btn">Entrar</button></Link>
+            <form onSubmit={Subscribe}>
+               <div><input type="email" required placeholder="email" onChange={e => props.setEmail(e.target.value)}/></div>
+               <br></br>
+               <div><input type="text" required  placeholder="senha" onChange={e => props.setSenha(e.target.value)}/></div>
+               <br></br>
+               <button type="submit" data-test="login-btn">Entrar</button>
+            </form>
             <Link to="/cadastro">Não tem uma conta? Cadastre-se</Link>
             
         </Background>

@@ -16,7 +16,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-               <Route path="/" element={<Login/>}/>
+               <Route path="/" element={<Login email={email} setEmail={setEmail} senha={senha} setSenha={setSenha}/>}/>
                <Route path="/cadastro" element={<Cadastro email={email} setEmail={setEmail} nome={nome} setNome={setNome} senha={senha} setSenha={setSenha} foto={foto} setFoto={setFoto}/>} />
                <Route path="/historico" element={<Histórico/>}/>
                <Route path="/hoje" element={<Hoje />}/>
