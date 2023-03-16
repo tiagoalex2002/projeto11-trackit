@@ -12,7 +12,7 @@ export default function Login(){
             <br></br>
             <div><input placeholder="senha"/></div>
             <br></br>
-            <Link to="/cadastro"><button>Entrar</button></Link>
+            <Link to="/habitos"><button>Entrar</button></Link>
             <Link to="/cadastro">Não tem uma conta? Cadastre-se</Link>
             
         </Background>
