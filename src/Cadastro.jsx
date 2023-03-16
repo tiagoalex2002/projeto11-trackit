@@ -19,13 +19,13 @@ export default function Cadastro(props){
         <Background>
          <form onSubmit={SignUp}>
             <img src={foto} alt="logo"/>
-            <div><input type="email" required placeholder="email" onChange={e => props.setEmail(e.target.value)}/></div>
+            <div><input type="email" value={props.email} required placeholder="email" onChange={e => props.setEmail(e.target.value)}/></div>
             <br></br>
-            <div><input type="text" required placeholder="senha" onChange={e => props.setSenha(e.target.value)}/></div>
+            <div><input type="text" value={props.senha} required placeholder="senha" onChange={e => props.setSenha(e.target.value)}/></div>
             <br></br>
-            <div><input type="text" required placeholder="nome" onChange={e => props.setNome(e.target.value)}/></div>
+            <div><input type="text" value={props.nome} required placeholder="nome" onChange={e => props.setNome(e.target.value)}/></div>
             <br></br>
-            <div><input type="url" required placeholder="foto" onChange={e => props.setFoto(e.target.value)}/></div>
+            <div><input type="url" value={props.foto} required placeholder="foto" onChange={e => props.setFoto(e.target.value)}/></div>
             <br></br>
             <button type="submit" data-test="signup-btn">Cadastrar</button>
          </form>
