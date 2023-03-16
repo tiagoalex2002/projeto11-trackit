@@ -2,6 +2,7 @@ import styled from "styled-components"
 import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 
 export default function Login(props){
@@ -10,9 +11,8 @@ export default function Login(props){
 
     function Subscribe(event){
         event.preventDefault();
-
-        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: props.email, password: props.senha})
-        requisition.then(() => navigate("/hoje"))
+        useEffect(() => {const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: props.email, password: props.senha})
+        requisition.then(() => navigate("/hoje"))},[])
     }
 
     return(

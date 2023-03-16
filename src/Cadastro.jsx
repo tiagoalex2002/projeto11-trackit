@@ -3,6 +3,7 @@ import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 
 export default function Cadastro(props){
@@ -11,9 +12,9 @@ export default function Cadastro(props){
 
     function SignUp(event){
         event.preventDefault();
+        useEffect(() => {const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: props.email, password: props.senha, name: props.nome, image: props.foto})
+        requisition.then(() => navigate("/"))},[])
 
-        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: props.email, password: props.senha, name: props.nome, image: props.foto})
-        requisition.then(() => navigate("/"))
     }
     return(
         <Background>
