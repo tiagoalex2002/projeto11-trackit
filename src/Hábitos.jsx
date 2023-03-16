@@ -31,12 +31,14 @@ export default function Hábitos(props){
             </First>
             <ContainerAdd>
                 <Add add={props.add}>
-                    <input placeholder="nome do hábito"/>
-                    <ContainerButton>{dias.map((i) => <Dias>{i}</Dias>)}</ContainerButton>
-                    <Rizz>
-                        <Cancelar onClick={Cancel}>Cancelar</Cancelar>
-                        <Salvar>Salvar</Salvar>
-                    </Rizz>
+                    <form>
+                      <input placeholder="nome do hábito"/>
+                      <ContainerButton>{dias.map((i) => <Dias>{i}</Dias>)}</ContainerButton>
+                      <Rizz>
+                          <Cancelar onClick={Cancel}>Cancelar</Cancelar>
+                          <Salvar type="submit">Salvar</Salvar>
+                      </Rizz>
+                    </form>
                 </Add>
             </ContainerAdd>
             <Text2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text2>
