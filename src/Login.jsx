@@ -12,8 +12,8 @@ export default function Login(props){
 
     function Subscribe(event){
         event.preventDefault();
-        useEffect(() => {const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: props.email, password: props.senha})
-        requisition.then(() => navigate("/hoje"))},[])
+        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: props.email, password: props.senha}); 
+        requisition.then(() => navigate("/hoje"))
     }
 
     return(

@@ -8,13 +8,12 @@ import { useEffect } from "react"
 
 export default function Cadastro(props){
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     function SignUp(event){
         event.preventDefault();
-        useEffect(() => {const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: props.email, password: props.senha, name: props.nome, image: props.foto})
-        requisition.then(() => navigate("/"))},[])
-
+        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: props.email, password: props.senha, name: props.nome, image: props.foto}); 
+        requisition.then(() => navigate("/"))
     }
     return(
         <Background>
