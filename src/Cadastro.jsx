@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import UserContext from "./Contexts/UserContext"
 import { useContext } from "react"
 import { ThreeDots } from "react-loader-spinner"
+import { useState } from "react"
 
 
 export default function Cadastro(){
