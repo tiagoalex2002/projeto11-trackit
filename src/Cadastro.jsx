@@ -5,7 +5,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import UserContext from "./Contexts/UserContext"
 import { useContext } from "react"
-import { ProviderUser } from "./Contexts/UserContext"
+import { ThreeDots } from "react-loader-spinner"
 
 
 export default function Cadastro(){
@@ -18,27 +18,30 @@ export default function Cadastro(){
     const {setFoto}= useContext(UserContext)
     const {senha} = useContext(UserContext)
     const {setSenha}= useContext(UserContext)
+    const [invalido,setInvalido]= useState(false)
 
     const navigate = useNavigate();
 
     function SignUp(event){
         event.preventDefault();
+        setInvalido(true)
         const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: email, password: senha, name: nome, image: foto}); 
-        requisition.then(() => navigate("/"))
+        requisition.then((response) =>{navigate("/")
+        setInvalido(false)})
     }
     return(
         <Background>
         <img src={image} alt="logo"/>
          <form onSubmit={SignUp}>
-            <div><input data-test="email-input" type="email" value={email} required placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
+            <div><input disabled={invalido} data-test="email-input" type="email" value={email} required placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
             <br></br>
-            <div><input  data-test="password-input" type="text" value={senha} required placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
+            <div><input disabled={invalido} data-test="password-input" type="text" value={senha} required placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
             <br></br>
-            <div><input data-test="user-name-input" type="text" value={nome} required placeholder="nome" onChange={e => setNome(e.target.value)}/></div>
+            <div><input disabled={invalido} data-test="user-name-input" type="text" value={nome} required placeholder="nome" onChange={e => setNome(e.target.value)}/></div>
             <br></br>
-            <div><input data-test="user-image-input" type="url" value={foto} required placeholder="foto" onChange={e => setFoto(e.target.value)}/></div>
+            <div><input disabled={invalido} data-test="user-image-input" type="url" value={foto} required placeholder="foto" onChange={e => setFoto(e.target.value)}/></div>
             <br></br>
-            <button type="submit" data-test="signup-btn">Cadastrar</button>
+            <button disabled={invalido} type="submit" data-test="signup-btn">{invalido? <ThreeDots/>:"Cadastrar"}</button>
          </form>
             
             <Link data-test="login-link" to="/">Já tem uma conta? Faça login!</Link>

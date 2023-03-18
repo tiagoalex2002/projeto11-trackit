@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import UserContext from "./Contexts/UserContext"
 import { ProviderUser } from "./Contexts/UserContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
+import { ThreeDots } from "react-loader-spinner"
+
 
 
 export default function Login(){
@@ -15,14 +17,17 @@ export default function Login(){
     const {senha} = useContext(UserContext)
     const {setSenha}= useContext(UserContext)
     const {setToken}= useContext(UserContext)
+    const [invalido,setInvalido]= useState(false)
 
     const navigate = useNavigate()
 
     function Subscribe(event){
         event.preventDefault();
+        setInvalido(true)
         const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: senha}); 
         requisition.then((response) => {navigate("/hoje");
-        setToken(response.token)})
+        setToken(response.token);
+        setInvalido(false)})
     }
 
     return(
@@ -30,11 +35,11 @@ export default function Login(){
         <Background>
             <img src={foto} alt="logo"/>
             <form onSubmit={Subscribe}>
-               <div><input data-test="email-input" type="email" required value={email} placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
+               <div><input disabled={invalido} data-test="email-input" type="email" required value={email} placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
                <br></br>
-               <div><input  data-test="password-input" type="text" required value={senha} placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
+               <div><input disabled={invalido} data-test="password-input" type="text" required value={senha} placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
                <br></br>
-               <button type="submit" data-test="login-btn">Entrar</button>
+               <button disabled={invalido} type="submit" data-test="login-btn">{invalido? <ThreeDots/> :"Entrar"}</button>
             </form>
             <Link data-test="signup-link" to="/cadastro">Não tem uma conta? Cadastre-se</Link>
             

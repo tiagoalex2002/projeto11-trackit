@@ -13,6 +13,7 @@ import { ProviderUser } from "./Contexts/UserContext"
 import UserContext from "./Contexts/UserContext"
 import { useContext } from "react"
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Hábitos(props){
 
@@ -20,6 +21,7 @@ export default function Hábitos(props){
 
     const [name,setName]= useState("")
     const [days, setDays]= useState([])
+    const [invalido,setInvalido]= useState(false)
     
     function Addition(){
         {props.setAdd("")}
@@ -31,10 +33,13 @@ export default function Hábitos(props){
 
     function ReqHábito(event){
         event.preventDefault();
+        setInvalido(true)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", 
         { name: name, days: days }, {
             headers: { Authorization: `Bearer ${token}` }
         });
+        request.then((response) => {setInvalido(false);
+        props.setAdd("none")})
     }
     return(
     <div>
@@ -50,11 +55,11 @@ export default function Hábitos(props){
             <ContainerAdd>
                 <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
-                      <input data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
+                      <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
                       <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day"  onClick={() => setDays([...days, i.number])}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
                           <Cancelar data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
-                          <Salvar data-test="habit-create-save-btn" type="submit">Salvar</Salvar>
+                          <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
                       </Rizz>
                     </form>
                 </Add>
