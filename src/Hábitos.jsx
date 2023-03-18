@@ -82,10 +82,8 @@ export default function Hábitos(props){
                     <form onSubmit={ReqHábito}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
                       <ContainerButton>{dias.map((i) => <Dias disabled={invalido} days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
-                      <Rizz>
-                          <Cancelar disabled={invalido} data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
-                          <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
-                      </Rizz>
+                      <Cancelar disabled={invalido} data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
+                      <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
                     </form>
                 </Add>
             </ContainerAdd>
