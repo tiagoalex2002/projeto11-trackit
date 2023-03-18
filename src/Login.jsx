@@ -27,20 +27,18 @@ export default function Login(){
 
     return(
 
-     <ProviderUser>
         <Background>
             <img src={foto} alt="logo"/>
             <form onSubmit={Subscribe}>
-               <div><input type="email" required value={email} placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
+               <div><input data-test="email-input" type="email" required value={email} placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
                <br></br>
-               <div><input type="text" required value={senha} placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
+               <div><input  data-test="password-input" type="text" required value={senha} placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
                <br></br>
                <button type="submit" data-test="login-btn">Entrar</button>
             </form>
-            <Link to="/cadastro">Não tem uma conta? Cadastre-se</Link>
+            <Link data-test="signup-link" to="/cadastro">Não tem uma conta? Cadastre-se</Link>
             
         </Background>
-     </ProviderUser>
     )
 
 }

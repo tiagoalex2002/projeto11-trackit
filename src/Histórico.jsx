@@ -12,7 +12,7 @@ export default function Histórico(){
 
     return(
         <div>
-        <Header>
+        <Header data-test="header">
             <Title>TrackIt</Title>
             <img src={foto} alt="perfil"/>
         </Header>
@@ -22,9 +22,9 @@ export default function Histórico(){
             </First>
             <Text2>Em breve você poderá ver o histórico dos seus hábitos aqui!</Text2>
         </Body>
-        <Footer>
-            <Link to="/habitos"><Text3>Hábitos</Text3></Link>
-            <Container> 
+        <Footer data-test="menu">
+            <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
+            <Container data-test="today-link"> 
              <CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
              styles={buildStyles({
              backgroundColor: "#3e98c7",
@@ -35,7 +35,7 @@ export default function Histórico(){
              height: "91px"
               })}
       /></Container>
-           <Link to="/historico"><Text3>Histórico</Text3></Link>
+           <Link  data-test="history-link"  to="/historico"><Text3>Histórico</Text3></Link>
         </Footer>
 
     </div>

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import  foto from "./logo-completa.svg"
+import  image from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
@@ -18,8 +18,6 @@ export default function Cadastro(){
     const {setFoto}= useContext(UserContext)
     const {senha} = useContext(UserContext)
     const {setSenha}= useContext(UserContext)
-    const {token} = useContext(UserContext)
-    const {setToken}= useContext(UserContext)
 
     const navigate = useNavigate();
 
@@ -29,25 +27,23 @@ export default function Cadastro(){
         requisition.then(() => navigate("/"))
     }
     return(
-     <ProviderUser>
         <Background>
+        <img src={image} alt="logo"/>
          <form onSubmit={SignUp}>
-            <img src={foto} alt="logo"/>
-            <div><input type="email" value={email} required placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
+            <div><input data-test="email-input" type="email" value={email} required placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
             <br></br>
-            <div><input type="text" value={senha} required placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
+            <div><input  data-test="password-input" type="text" value={senha} required placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
             <br></br>
-            <div><input type="text" value={nome} required placeholder="nome" onChange={e => setNome(e.target.value)}/></div>
+            <div><input data-test="user-name-input" type="text" value={nome} required placeholder="nome" onChange={e => setNome(e.target.value)}/></div>
             <br></br>
-            <div><input type="url" value={foto} required placeholder="foto" onChange={e => setFoto(e.target.value)}/></div>
+            <div><input data-test="user-image-input" type="url" value={foto} required placeholder="foto" onChange={e => setFoto(e.target.value)}/></div>
             <br></br>
             <button type="submit" data-test="signup-btn">Cadastrar</button>
          </form>
             
-            <Link to="/">Já tem uma conta? Faça login!</Link>
+            <Link data-test="login-link" to="/">Já tem uma conta? Faça login!</Link>
             
         </Background>
-     </ProviderUser>
     )
 }
 

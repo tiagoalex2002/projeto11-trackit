@@ -38,32 +38,32 @@ export default function Hábitos(props){
     }
     return(
     <div>
-        <Header>
+        <Header data-test="header">
             <Title>TrackIt</Title>
             <img src={foto} alt="perfil"/>
         </Header>
-        <Body>
+        <Body >
             <First>
                 <Text1>Meus hábitos</Text1>
-                <button onClick={Addition}>+</button>
+                <button data-test="habit-create-btn"  onClick={Addition}>+</button>
             </First>
             <ContainerAdd>
-                <Add add={props.add}>
+                <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
-                      <input placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
-                      <ContainerButton>{dias.map((i) => <Dias onClick={() => setDays([...days, i.number])}>{i.dia}</Dias>)}</ContainerButton>
+                      <input data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
+                      <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day"  onClick={() => setDays([...days, i.number])}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
-                          <Cancelar onClick={Cancel}>Cancelar</Cancelar>
-                          <Salvar type="submit">Salvar</Salvar>
+                          <Cancelar data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
+                          <Salvar data-test="habit-create-save-btn" type="submit">Salvar</Salvar>
                       </Rizz>
                     </form>
                 </Add>
             </ContainerAdd>
             <Text2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text2>
         </Body>
-        <Footer>
-            <Text3>Hábitos</Text3>
-            <Container> 
+        <Footer data-test="menu">
+            <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
+            <Container data-test="today-link" > 
              <CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
              styles={buildStyles({
              backgroundColor: "#3e98c7",
@@ -74,7 +74,7 @@ export default function Hábitos(props){
              height: "91px"
               })}
       /></Container>
-           <Link to="/historico"><Text3>Histórico</Text3></Link>
+           <Link  data-test="history-link"  to="/historico"><Text3>Histórico</Text3></Link>
         </Footer>
 
     </div>
