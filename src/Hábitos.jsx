@@ -46,8 +46,8 @@ export default function Hábitos(props){
     function DaySelection(index){
         if(days.includes(index.number)){
             let h=days.indexOf(index.number)
-            days.splice(h,1)
-            setDays(days)
+            let lista=days.splice(h,1)
+            setDays(lista)
         }
         else{
             setDays([...days,index.number])
@@ -81,9 +81,9 @@ export default function Hábitos(props){
                 <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
-                      <ContainerButton>{dias.map((i) => <Dias days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
+                      <ContainerButton>{dias.map((i) => <Dias disabled={invalido} days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
-                          <Cancelar data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
+                          <Cancelar disabled={invalido} data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
                           <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
                       </Rizz>
                     </form>
@@ -287,7 +287,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 19.976px;
 line-height: 25px;
-color: ${props => props.days.includes(props.numero)? "#DBDBDB": "#FFFFFF"};`;
+color: ${props => props.days.includes(props.numero)? "#FFFFFF" : "#DBDBDB"};`;
 
 const Habits=styled.div `
 width: 340px;

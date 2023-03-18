@@ -12,6 +12,8 @@ import { useContext } from "react"
 
 export default function Hoje(){
     const {foto}= useContext(UserContext);
+    const {token}= useContext(UserContext)
+    
     return(
         <div>
         <Header data-test="header">
@@ -20,9 +22,9 @@ export default function Hoje(){
         </Header>
         <Body>
             <First>
-                <Text1>Segunda, 17/05</Text1>
+                <Text1 data-test="today">Segunda, 17/05</Text1>
             </First>
-            <Text2>Nenhum hábito concluído ainda</Text2>
+            <Text2 data-test="today-counter">Nenhum hábito concluído ainda</Text2>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
