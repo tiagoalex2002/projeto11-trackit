@@ -29,6 +29,10 @@ export default function Cadastro(){
         const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: email, password: senha, name: nome, image: foto}); 
         requisition.then((response) =>{navigate("/")
         setInvalido(false)})
+        requisition.catch((response) =>{if(response.status === 409){
+            alert("Usuário já cadastrado")
+            setInvalido(false)
+        }})
     }
     return(
         <Background>

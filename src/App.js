@@ -22,9 +22,9 @@ export default function App() {
             <Routes>
                <Route path="/" element={<UserContext.Provider value={UserValue}><Login/></UserContext.Provider>}/>
                <Route path="/cadastro" element={<UserContext.Provider value={UserValue}><Cadastro/></UserContext.Provider>} />
-               <Route path="/historico" element={<Histórico/>}/>
-               <Route path="/hoje" element={<Hoje />}/>
-               <Route path="/habitos" element={<Hábitos add={add} setAdd={setAdd}/>}/>
+               <Route path="/historico" element={<UserContext.Provider value={UserValue}><Histórico/></UserContext.Provider>}/>
+               <Route path="/hoje" element={<UserContext.Provider value={UserValue}><Hoje /></UserContext.Provider>}/>
+               <Route path="/habitos" element={<UserContext.Provider value={UserValue}><Hábitos add={add} setAdd={setAdd}/></UserContext.Provider>}/>
             </Routes>
             
         </BrowserRouter>

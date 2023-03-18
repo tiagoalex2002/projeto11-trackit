@@ -27,6 +27,10 @@ export default function Login(){
         requisition.then((response) => {navigate("/hoje");
         setToken(response.token);
         setInvalido(false)})
+        requisition.catch((response) =>{
+            alert("Usuário não encontrado, tente novamente")
+            setInvalido(false)
+        })
     }
 
     return(

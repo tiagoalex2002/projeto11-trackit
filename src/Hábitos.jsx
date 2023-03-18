@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import dias from "./dias";
 import { useState } from "react";
@@ -9,13 +8,14 @@ import {
     buildStyles
   } from "react-circular-progressbar";
    import "react-circular-progressbar/dist/styles.css";
-import { ProviderUser } from "./Contexts/UserContext"
 import UserContext from "./Contexts/UserContext"
 import { useContext } from "react"
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function Hábitos(props){
+
+    const {foto}= useContext(UserContext)
 
     const {token} = useContext(UserContext)
 

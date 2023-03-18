@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import {
     CircularProgressbar,
@@ -7,8 +6,12 @@ import {
     buildStyles
   } from "react-circular-progressbar";
    import "react-circular-progressbar/dist/styles.css";
+import UserContext from "./Contexts/UserContext"
+import { useContext } from "react"
 
 export default function Histórico(){
+
+    const {foto}= useContext(UserContext)
 
     return(
         <div>

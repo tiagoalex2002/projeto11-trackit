@@ -7,9 +7,12 @@ import {
     buildStyles
   } from "react-circular-progressbar";
    import "react-circular-progressbar/dist/styles.css";
+import UserContext from "./Contexts/UserContext"
+import { useContext } from "react"
 
 
 export default function Hoje(){
+    const {foto}= useContext(UserContext);
     return(
         <div>
         <Header data-test="header">
