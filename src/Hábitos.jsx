@@ -24,8 +24,10 @@ export default function Hábitos(props){
 
     const {token} = useContext(UserContext)
 
-    const [name,setName]= useState("")
-    const [days, setDays]= useState([])
+    const {name}= useContext(HabitsContext)
+    const {setName}=useContext(HabitsContext)
+    const {days}= useContext(HabitsContext)
+    const {setDays}= useContext(HabitsContext)
     const [invalido,setInvalido]= useState(false)
 
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",{
@@ -74,6 +76,7 @@ export default function Hábitos(props){
                 <Text1>Meus hábitos</Text1>
                 <button data-test="habit-create-btn"  onClick={Addition}>+</button>
             </First>
+            <div>{habitos.map((i)=> <Habits><Name>{i.name}</Name><div>{dias.map((j)=> <Dias2 numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div></Habits>)}</div>
             <ContainerAdd>
                 <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
@@ -284,4 +287,42 @@ font-style: normal;
 font-weight: 400;
 font-size: 19.976px;
 line-height: 25px;
-color: ${props => props.days.includes(props.numero)? "#DBDBDB": "#FFFFFF"};`
+color: ${props => props.days.includes(props.numero)? "#DBDBDB": "#FFFFFF"};`;
+
+const Habits=styled.div `
+width: 340px;
+height: 91pxpx;
+background: #FFFFFF;
+border-radius: 5px;`;
+
+const Name=styled.div `
+background: #FFFFFF;
+border: 1px solid #D5D5D5;
+border-radius: 5px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+color: #DBDBDB; 
+padding: 5px;
+margin-top:20px;
+margin-left: 4px;
+`;
+
+const Dias2=styled.button `
+width: 30px;
+height: 30px;
+margin-left:4px;
+margin-right:4px;
+margin-top:8px;
+background: ${props => props.selecionados.includes(props.numero)? "#D4D4D4": "#FFFFFF"};
+border: 1px solid #D5D5D5;
+border-radius: 5px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+color: ${props => props.selecionados.includes(props.numero)? "#DBDBDB": "#FFFFFF"};
+`;

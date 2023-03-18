@@ -17,8 +17,10 @@ export default function App() {
     const [token, setToken]= useState("")
     const [add,setAdd]=useState("none")
     const [habitos,setHabitos]=useState([])
+    const [name,setName]= useState("")
+    const [days, setDays]= useState([])
     const UserValue= {email: email, setEmail: setEmail,nome: nome, setNome: setNome,foto: foto, setFoto : setFoto,senha: senha,setSenha: setSenha,token: token,setToken: setToken}
-    const HabitsValue={habitos:habitos,setHabitos: setHabitos}
+    const HabitsValue={habitos:habitos,setHabitos: setHabitos, name: name, setName: setName, days: days, setDays:setDays}
     
     return (
         <BrowserRouter>
