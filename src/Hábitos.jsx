@@ -78,7 +78,7 @@ export default function Hábitos(props){
                 <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
-                      <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
+                      <ContainerButton>{dias.map((i) => <Dias days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
                           <Cancelar data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
                           <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
@@ -173,7 +173,7 @@ font-size: 17.976px;
 line-height: 22px;
 
 color: #666666;
-display:${props => props.habito.length ===0? "": none}`;
+display:${props => props.habito.length ===0? "": "none"}`;
 
 const Footer=styled.footer `
 display:flex;
@@ -276,7 +276,7 @@ height: 30px;
 margin-left:4px;
 margin-right:4px;
 margin-top:8px;
-background: ${props => days.includes(props.numero)? "#D4D4D4": "#FFFFFF"};
+background: ${props => props.days.includes(props.numero)? "#D4D4D4": "#FFFFFF"};
 border: 1px solid #D5D5D5;
 border-radius: 5px;
 font-family: 'Lexend Deca';
@@ -284,4 +284,4 @@ font-style: normal;
 font-weight: 400;
 font-size: 19.976px;
 line-height: 25px;
-color: ${props => days.includes(props.numero)? "#DBDBDB": "#FFFFFF"};`
+color: ${props => props.days.includes(props.numero)? "#DBDBDB": "#FFFFFF"};`

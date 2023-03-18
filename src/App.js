@@ -6,6 +6,7 @@ import Hábitos from "./Hábitos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import UserContext from "./Contexts/UserContext";
+import HabitsContext from "./Contexts/HabitsContext";
 
 export default function App() {
 
