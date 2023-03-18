@@ -22,6 +22,7 @@ export default function Hábitos(props){
     const [name,setName]= useState("")
     const [days, setDays]= useState([])
     const [invalido,setInvalido]= useState(false)
+    const [selecionados, setSelecionados]=useState([])
     
     function Addition(){
         {props.setAdd("")}
@@ -29,6 +30,12 @@ export default function Hábitos(props){
 
     function Cancel(){
         {props.setAdd("none")}
+    }
+
+    function DaySelection(index){
+        setDays([...days,index.number])
+        setSelecionados([...selecionados,index.dia])
+
     }
 
     function ReqHábito(event){
@@ -56,7 +63,7 @@ export default function Hábitos(props){
                 <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
-                      <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day"  onClick={() => setDays([...days, i.number])}>{i.dia}</Dias>)}</ContainerButton>
+                      <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day"  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
                           <Cancelar data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
                           <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>

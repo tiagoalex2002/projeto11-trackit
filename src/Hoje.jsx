@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import {
     CircularProgressbar,
