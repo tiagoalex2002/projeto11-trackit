@@ -176,7 +176,7 @@ font-size: 17.976px;
 line-height: 22px;
 
 color: #666666;
-display:${props => props.habito.length ===0? "": "none"}`;
+display:${props => props.habitos.length ===0? "": "none"}`;
 
 const Footer=styled.footer `
 display:flex;
