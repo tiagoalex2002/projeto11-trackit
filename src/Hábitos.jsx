@@ -12,8 +12,13 @@ import UserContext from "./Contexts/UserContext"
 import { useContext } from "react"
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
+import { useEffect } from "react";
+import HabitsContext from "./Contexts/HabitsContext";
 
 export default function Hábitos(props){
+
+    const {habitos}= useContext(HabitsContext)
+    const {setHabitos}= useContext(HabitsContext)
 
     const {foto}= useContext(UserContext)
 
@@ -22,10 +27,14 @@ export default function Hábitos(props){
     const [name,setName]= useState("")
     const [days, setDays]= useState([])
     const [invalido,setInvalido]= useState(false)
-    const [selecionados, setSelecionados]=useState([])
+
+    useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",{
+        headers: { Authorization: `Bearer ${token}` }
+    }); promise.then((response)=>{setHabitos(response.data)})})
     
     function Addition(){
         {props.setAdd("")}
+        setDays([])
     }
 
     function Cancel(){
@@ -33,8 +42,14 @@ export default function Hábitos(props){
     }
 
     function DaySelection(index){
-        setDays([...days,index.number])
-        setSelecionados([...selecionados,index.dia])
+        if(days.includes(index.number)){
+            let h=days.indexOf(index.number)
+            days.splice(h,1)
+            setDays(days)
+        }
+        else{
+            setDays([...days,index.number])
+        }
 
     }
 
@@ -63,7 +78,7 @@ export default function Hábitos(props){
                 <Add data-test="habit-create-container" add={props.add}>
                     <form onSubmit={ReqHábito}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
-                      <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day"  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
+                      <ContainerButton>{dias.map((i) => <Dias  data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
                           <Cancelar data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
                           <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
@@ -71,7 +86,7 @@ export default function Hábitos(props){
                     </form>
                 </Add>
             </ContainerAdd>
-            <Text2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text2>
+            <Text2 habitos={habitos}>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text2>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
@@ -157,7 +172,8 @@ font-weight: 400;
 font-size: 17.976px;
 line-height: 22px;
 
-color: #666666;`;
+color: #666666;
+display:${props => props.habito.length ===0? "": none}`;
 
 const Footer=styled.footer `
 display:flex;
@@ -260,7 +276,7 @@ height: 30px;
 margin-left:4px;
 margin-right:4px;
 margin-top:8px;
-background: #FFFFFF;
+background: ${props => days.includes(props.numero)? "#D4D4D4": "#FFFFFF"};
 border: 1px solid #D5D5D5;
 border-radius: 5px;
 font-family: 'Lexend Deca';
@@ -268,4 +284,4 @@ font-style: normal;
 font-weight: 400;
 font-size: 19.976px;
 line-height: 25px;
-color: #DBDBDB;`
+color: ${props => days.includes(props.numero)? "#DBDBDB": "#FFFFFF"};`

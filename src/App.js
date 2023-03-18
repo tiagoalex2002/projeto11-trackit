@@ -15,7 +15,9 @@ export default function App() {
     const [senha,setSenha]= useState("")
     const [token, setToken]= useState("")
     const [add,setAdd]=useState("none")
+    const [habitos,setHabitos]=useState([])
     const UserValue= {email: email, setEmail: setEmail,nome: nome, setNome: setNome,foto: foto, setFoto : setFoto,senha: senha,setSenha: setSenha,token: token,setToken: setToken}
+    const HabitsValue={habitos:habitos,setHabitos: setHabitos}
     
     return (
         <BrowserRouter>
@@ -24,7 +26,7 @@ export default function App() {
                <Route path="/cadastro" element={<UserContext.Provider value={UserValue}><Cadastro/></UserContext.Provider>} />
                <Route path="/historico" element={<UserContext.Provider value={UserValue}><Histórico/></UserContext.Provider>}/>
                <Route path="/hoje" element={<UserContext.Provider value={UserValue}><Hoje /></UserContext.Provider>}/>
-               <Route path="/habitos" element={<UserContext.Provider value={UserValue}><Hábitos add={add} setAdd={setAdd}/></UserContext.Provider>}/>
+               <Route path="/habitos" element={<HabitsContext.Provider value={HabitsValue}><UserContext.Provider value={UserValue}><Hábitos add={add} setAdd={setAdd}/></UserContext.Provider></HabitsContext.Provider>}/>
             </Routes>
             
         </BrowserRouter>
