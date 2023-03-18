@@ -2,14 +2,24 @@ import styled from "styled-components"
 import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import dias from "./dias";
+import { useState } from "react";
 import {
     CircularProgressbar,
     CircularProgressbarWithChildren,
     buildStyles
   } from "react-circular-progressbar";
    import "react-circular-progressbar/dist/styles.css";
+import { ProviderUser } from "./Contexts/UserContext"
+import UserContext from "./Contexts/UserContext"
+import { useContext } from "react"
+import axios from "axios";
 
 export default function Hábitos(props){
+
+    const {token} = useContext(UserContext)
+
+    const [name,setName]= useState("")
+    const [days, setDays]= useState([])
     
     function Addition(){
         {props.setAdd("")}
@@ -17,6 +27,14 @@ export default function Hábitos(props){
 
     function Cancel(){
         {props.setAdd("none")}
+    }
+
+    function ReqHábito(event){
+        event.preventDefault();
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", 
+        { name: name, days: days }, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
     }
     return(
     <div>
@@ -31,9 +49,9 @@ export default function Hábitos(props){
             </First>
             <ContainerAdd>
                 <Add add={props.add}>
-                    <form>
-                      <input placeholder="nome do hábito"/>
-                      <ContainerButton>{dias.map((i) => <Dias>{i}</Dias>)}</ContainerButton>
+                    <form onSubmit={ReqHábito}>
+                      <input placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
+                      <ContainerButton>{dias.map((i) => <Dias onClick={() => setDays([...days, i.number])}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
                           <Cancelar onClick={Cancel}>Cancelar</Cancelar>
                           <Salvar type="submit">Salvar</Salvar>

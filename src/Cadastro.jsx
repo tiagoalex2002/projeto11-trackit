@@ -3,29 +3,43 @@ import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import UserContext from "./Contexts/UserContext"
+import { useContext } from "react"
+import { ProviderUser } from "./Contexts/UserContext"
 
 
-export default function Cadastro(props){
+export default function Cadastro(){
+
+    const {email}= useContext(UserContext)
+    const {setEmail}= useContext(UserContext)
+    const {nome}= useContext(UserContext)
+    const {setNome}= useContext(UserContext)
+    const {foto}= useContext(UserContext)
+    const {setFoto}= useContext(UserContext)
+    const {senha} = useContext(UserContext)
+    const {setSenha}= useContext(UserContext)
+    const {token} = useContext(UserContext)
+    const {setToken}= useContext(UserContext)
 
     const navigate = useNavigate();
 
     function SignUp(event){
         event.preventDefault();
-        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: props.email, password: props.senha, name: props.nome, image: props.foto}); 
+        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", { email: email, password: senha, name: nome, image: foto}); 
         requisition.then(() => navigate("/"))
     }
     return(
+     <ProviderUser>
         <Background>
          <form onSubmit={SignUp}>
             <img src={foto} alt="logo"/>
-            <div><input type="email" value={props.email} required placeholder="email" onChange={e => props.setEmail(e.target.value)}/></div>
+            <div><input type="email" value={email} required placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
             <br></br>
-            <div><input type="text" value={props.senha} required placeholder="senha" onChange={e => props.setSenha(e.target.value)}/></div>
+            <div><input type="text" value={senha} required placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
             <br></br>
-            <div><input type="text" value={props.nome} required placeholder="nome" onChange={e => props.setNome(e.target.value)}/></div>
+            <div><input type="text" value={nome} required placeholder="nome" onChange={e => setNome(e.target.value)}/></div>
             <br></br>
-            <div><input type="url" value={props.foto} required placeholder="foto" onChange={e => props.setFoto(e.target.value)}/></div>
+            <div><input type="url" value={foto} required placeholder="foto" onChange={e => setFoto(e.target.value)}/></div>
             <br></br>
             <button type="submit" data-test="signup-btn">Cadastrar</button>
          </form>
@@ -33,6 +47,7 @@ export default function Cadastro(props){
             <Link to="/">Já tem uma conta? Faça login!</Link>
             
         </Background>
+     </ProviderUser>
     )
 }
 

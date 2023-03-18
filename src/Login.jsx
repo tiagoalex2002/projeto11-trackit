@@ -2,33 +2,45 @@ import styled from "styled-components"
 import  foto from "./logo-completa.svg"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
 import axios from "axios"
+import UserContext from "./Contexts/UserContext"
+import { ProviderUser } from "./Contexts/UserContext"
+import { useContext } from "react"
 
 
-export default function Login(props){
+export default function Login(){
+
+    const {email}= useContext(UserContext)
+    const {setEmail}= useContext(UserContext)
+    const {senha} = useContext(UserContext)
+    const {setSenha}= useContext(UserContext)
+    const {setToken}= useContext(UserContext)
 
     const navigate = useNavigate()
 
     function Subscribe(event){
         event.preventDefault();
-        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: props.email, password: props.senha}); 
-        requisition.then(() => navigate("/hoje"))
+        const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: senha}); 
+        requisition.then((response) => {navigate("/hoje");
+        setToken(response.token)})
     }
 
     return(
+
+     <ProviderUser>
         <Background>
             <img src={foto} alt="logo"/>
             <form onSubmit={Subscribe}>
-               <div><input type="email" required placeholder="email" onChange={e => props.setEmail(e.target.value)}/></div>
+               <div><input type="email" required value={email} placeholder="email" onChange={e => setEmail(e.target.value)}/></div>
                <br></br>
-               <div><input type="text" required  placeholder="senha" onChange={e => props.setSenha(e.target.value)}/></div>
+               <div><input type="text" required value={senha} placeholder="senha" onChange={e => setSenha(e.target.value)}/></div>
                <br></br>
                <button type="submit" data-test="login-btn">Entrar</button>
             </form>
             <Link to="/cadastro">Não tem uma conta? Cadastre-se</Link>
             
         </Background>
+     </ProviderUser>
     )
 
 }
