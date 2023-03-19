@@ -30,6 +30,8 @@ export default function Hábitos(props){
     const {setDays}= useContext(HabitsContext)
     const [invalido,setInvalido]= useState(false)
 
+   
+
 
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",{
         headers: { Authorization: `Bearer ${token}` }
@@ -45,17 +47,15 @@ export default function Hábitos(props){
     }
 
     function DaySelection(index){
-        let lista=days
         if(days.includes(index.number)){
             console.log(days)
-            let h=lista.indexOf(index.number)
-            let novalista=lista.splice(h,1)
-            console.log(novalista)
-            setDays(novalista)
+            let h=days.indexOf(index.number)
+            days.splice(h,1)
+            console.log("oi")
+            setDays(days)
         }
         else{
-            console.log(days)
-            setDays([...lista,index.number])
+            setDays([...days,index.number])
         }
 
     }
