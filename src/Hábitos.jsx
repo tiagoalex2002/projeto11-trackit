@@ -75,10 +75,11 @@ export default function Hábitos(props){
     }
 
     function Delete(index){
-        const headers= { Authorization: `Bearer ${token}` }
-        const promise=axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}`,{headers})
-        promise.then((res)=> console.log(res))
-        promise.catch((error)=> console.log(error.response.data.message))
+        const top= {headers:{ Authorization: `Bearer ${token}` }}
+        if( window.confirm("Você quer mesmo excluir esse hábito da sua rotina?")){
+            const promise=axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}`,top)
+            promise.then((response)=> setHabitos(habitos.filter(item=> item.id !== index.id)))
+        }
     }
     return(
     <div>

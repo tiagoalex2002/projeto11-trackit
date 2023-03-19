@@ -13,11 +13,82 @@ import { useEffect } from "react";
 import TodayContext from "./Contexts/TodayContext";
 
 export default function Hoje(){
+
+    const date= new Date()
+    const hoje= date.getDate()
+    const mes= date.getMonth() + 1;
+    console.log(hoje);
+    console.log(mes)
+    const timeElapsed= Date.now()
+    const tod= new Date(timeElapsed)
+    const dat= tod.toDateString();
+    console.log(dat);
+    var weekday= tod.getDay()
+    console.log(weekday)
+    let dia;
+    if(weekday==0){
+        dia="Domingo";
+    }
+    else if(weekday==1){
+        dia="Segunda";
+    }
+    else if(weekday==2){
+        dia="Terça"
+    }
+    else if(weekday==3){
+        dia="Quarta"
+    }
+    else if(weekday==4){
+        dia="Quinta"
+    }
+    else if(weekday==5){
+        dia="Sexta"
+    }
+    else if(weekday==6){
+        dia="Sábado"
+    }
+
+    if(mes==1){
+        mes= 01
+    }
+    else if(mes==2){
+        mes=02;
+    }
+     else if(mes==3){
+        mes=03;
+    }
+     else if(mes==4){
+        mes=04;
+    }
+     else if(mes==5){
+        mes=05;
+    }
+     else if(mes==6){
+        mes=06;
+    }
+     else if(mes==7){
+        mes=07;
+    }
+     else if(mes==8){
+        mes=08;
+    }
+     else if(mes==9){
+        mes=09;
+    }
+
+
+
     const {foto}= useContext(UserContext);
     const {token}= useContext(UserContext);
     const {today}= useContext(TodayContext)
     const {setToday}= useContext(TodayContext)
+    const {information} = useContext(TodayContext)
+    const {setInformation}= useContext(TodayContext)
 
+
+    useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
+        headers: { Authorization: `Bearer ${token}` }
+    }); promise.then((response)=>{setToday(response.data)})})
 
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
         headers: { Authorization: `Bearer ${token}` }
@@ -31,7 +102,7 @@ export default function Hoje(){
         </Header>
         <Body>
             <First>
-                <Text1 data-test="today">Segunda, 17/05</Text1>
+                <Text1 data-test="today">{dia}, {hoje}/{mes}</Text1>
             </First>
             <Text2 data-test="today-counter">Nenhum hábito concluído ainda</Text2>
             <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
