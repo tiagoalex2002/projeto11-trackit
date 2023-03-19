@@ -95,7 +95,7 @@ export default function Hábitos(props){
             <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div><Icon onClick={(i)=> Delete(i)}data-test="habit-delete-btn"><ion-icon name="trash-outline"></ion-icon></Icon></Habits>)}</div>
             <ContainerAdd>
                 <Add onSubmit={ReqHábito} data-test="habit-create-container" add={props.add}>
-                      <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
+                      <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text"  value={name} onChange={e => setName(e.target.value)}/>
                       <ContainerButton>{dias.map((i) => <Dias type="button" disabled={invalido} days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
                          <Cancelar disabled={invalido} type="button" data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
