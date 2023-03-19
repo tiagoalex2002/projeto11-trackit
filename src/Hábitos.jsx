@@ -30,7 +30,6 @@ export default function Hábitos(props){
     const {setDays}= useContext(HabitsContext)
     const [invalido,setInvalido]= useState(false)
 
-    console.log(token)
 
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",{
         headers: { Authorization: `Bearer ${token}` }
@@ -46,13 +45,17 @@ export default function Hábitos(props){
     }
 
     function DaySelection(index){
+        let lista=days
         if(days.includes(index.number)){
-            let h=days.indexOf(index.number)
-            let lista=days.splice(h,1)
-            setDays(lista)
+            console.log(days)
+            let h=lista.indexOf(index.number)
+            let novalista=lista.splice(h,1)
+            console.log(novalista)
+            setDays(novalista)
         }
         else{
-            setDays([...days,index.number])
+            console.log(days)
+            setDays([...lista,index.number])
         }
 
     }
@@ -87,7 +90,7 @@ export default function Hábitos(props){
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
                       <ContainerButton>{dias.map((i) => <Dias type="button" disabled={invalido} days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
                       <Rizz>
-                         <Cancelar disabled={invalido} data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
+                         <Cancelar disabled={invalido} type="button" data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
                          <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
                       </Rizz>
                 </Add>

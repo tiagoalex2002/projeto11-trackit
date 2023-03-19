@@ -8,11 +8,20 @@ import {
    import "react-circular-progressbar/dist/styles.css";
 import UserContext from "./Contexts/UserContext"
 import { useContext } from "react"
-
+import axios from "axios";
+import { useEffect } from "react";
+import TodayContext from "./Contexts/TodayContext";
 
 export default function Hoje(){
     const {foto}= useContext(UserContext);
-    const {token}= useContext(UserContext)
+    const {token}= useContext(UserContext);
+    const {today}= useContext(TodayContext)
+    const {setToday}= useContext(TodayContext)
+
+
+    useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
+        headers: { Authorization: `Bearer ${token}` }
+    }); promise.then((response)=>{setToday(response.data)})})
     
     return(
         <div>
@@ -25,6 +34,7 @@ export default function Hoje(){
                 <Text1 data-test="today">Segunda, 17/05</Text1>
             </First>
             <Text2 data-test="today-counter">Nenhum hábito concluído ainda</Text2>
+            <div>{today.map((h)=>(<Habito><Habito1><div>Sequência atual:{h.currentSequence} dias</div><div>Seu recorde: {h.highestSequence} dias</div></Habito1><Check></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
@@ -138,3 +148,30 @@ text-align: center;
 color: #52B6FF;
 
 `
+
+const Habito=styled.div `
+width: 340px;
+height: 94px;
+background: #FFFFFF;
+border-radius: 5px;
+display:flex;
+flex-direction:row;`
+
+const Habito1=styled.div `
+width: 146px;
+height: 32px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 12.976px;
+line-height: 16px;
+color: #666666;`;
+
+const Check= styled.div `
+box-sizing: border-box;
+position: absolute;
+width: 69px;
+height: 69px;
+background: #EBEBEB;
+border: 1px solid #E7E7E7;
+border-radius: 5px;`;
