@@ -34,7 +34,7 @@ export default function Hoje(){
                 <Text1 data-test="today">Segunda, 17/05</Text1>
             </First>
             <Text2 data-test="today-counter">Nenhum hábito concluído ainda</Text2>
-            <div>{today.map((h)=>(<Habito><Habito1><div>Sequência atual:{h.currentSequence} dias</div><div>Seu recorde: {h.highestSequence} dias</div></Habito1><Check></Check></Habito>))}</div>
+            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check data-test="today-habit-check-btn"></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
@@ -175,3 +175,13 @@ height: 69px;
 background: #EBEBEB;
 border: 1px solid #E7E7E7;
 border-radius: 5px;`;
+
+const Titulo= styled.div `
+width: 208px;
+height: 25px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+color: #666666;`
