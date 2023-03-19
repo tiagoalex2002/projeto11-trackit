@@ -73,6 +73,13 @@ export default function Hábitos(props){
         props.setAdd("none")})
         request.catch((error)=> alert(error.response.data.message))
     }
+
+    function Delete(index){
+        const headers= { Authorization: `Bearer ${token}` }
+        const promise=axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}`,{headers})
+        promise.then((res)=> console.log(res))
+        promise.catch((error)=> console.log(error.response.data.message))
+    }
     return(
     <div>
         <Header data-test="header">
@@ -84,7 +91,7 @@ export default function Hábitos(props){
                 <Text1>Meus hábitos</Text1>
                 <button data-test="habit-create-btn"  onClick={Addition}>+</button>
             </First>
-            <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div><Icon data-test="habit-delete-btn"><ion-icon name="trash-outline"></ion-icon></Icon></Habits>)}</div>
+            <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div><Icon onClick={(i)=> Delete(i)}data-test="habit-delete-btn"><ion-icon name="trash-outline"></ion-icon></Icon></Habits>)}</div>
             <ContainerAdd>
                 <Add onSubmit={ReqHábito} data-test="habit-create-container" add={props.add}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
