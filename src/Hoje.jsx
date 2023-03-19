@@ -49,31 +49,31 @@ export default function Hoje(){
     }
 
     if(mes==1){
-        mes= 01
+        mes= "01";
     }
     else if(mes==2){
-        mes=02;
+        mes="02";
     }
      else if(mes==3){
-        mes=03;
+        mes="03";
     }
      else if(mes==4){
-        mes=04;
+        mes="04";
     }
      else if(mes==5){
-        mes=05;
+        mes="05";
     }
      else if(mes==6){
-        mes=06;
+        mes="06";
     }
      else if(mes==7){
-        mes=07;
+        mes="07";
     }
      else if(mes==8){
-        mes=08;
+        mes="08";
     }
      else if(mes==9){
-        mes=09;
+        mes="09";
     }
 
 
