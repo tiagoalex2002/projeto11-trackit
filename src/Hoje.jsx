@@ -26,6 +26,7 @@ export default function Hoje(){
     var weekday= tod.getDay()
     console.log(weekday)
     let dia;
+    let month;
     if(weekday==0){
         dia="Domingo";
     }
@@ -49,31 +50,31 @@ export default function Hoje(){
     }
 
     if(mes==1){
-        mes= "01";
+        month= "01";
     }
     else if(mes==2){
-        mes="02";
+        month="02";
     }
      else if(mes==3){
-        mes="03";
+        month="03";
     }
      else if(mes==4){
-        mes="04";
+        month="04";
     }
      else if(mes==5){
-        mes="05";
+        month="05";
     }
      else if(mes==6){
-        mes="06";
+        month="06";
     }
      else if(mes==7){
-        mes="07";
+        month="07";
     }
      else if(mes==8){
-        mes="08";
+        month="08";
     }
      else if(mes==9){
-        mes="09";
+        month="09";
     }
 
 
@@ -90,9 +91,7 @@ export default function Hoje(){
         headers: { Authorization: `Bearer ${token}` }
     }); promise.then((response)=>{setToday(response.data)})})
 
-    useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
-        headers: { Authorization: `Bearer ${token}` }
-    }); promise.then((response)=>{setToday(response.data)})})
+
     
     return(
         <div>
@@ -102,7 +101,7 @@ export default function Hoje(){
         </Header>
         <Body>
             <First>
-                <Text1 data-test="today">{dia}, {hoje}/{mes}</Text1>
+                <Text1 data-test="today">{dia}, {hoje}/{month}</Text1>
             </First>
             <Text2 data-test="today-counter">Nenhum hábito concluído ainda</Text2>
             <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
