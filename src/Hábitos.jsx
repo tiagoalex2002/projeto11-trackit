@@ -84,7 +84,7 @@ export default function Hábitos(props){
                 <Text1>Meus hábitos</Text1>
                 <button data-test="habit-create-btn"  onClick={Addition}>+</button>
             </First>
-            <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div></Habits>)}</div>
+            <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div><Icon data-test="habit-delete-btn"><ion-icon name="trash-outline"></ion-icon></Icon></Habits>)}</div>
             <ContainerAdd>
                 <Add onSubmit={ReqHábito} data-test="habit-create-container" add={props.add}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
@@ -332,3 +332,7 @@ font-size: 19.976px;
 line-height: 25px;
 color: ${props => props.selecionados.includes(props.numero)? "#DBDBDB": "#FFFFFF"};
 `;
+
+const Icon=styled.button `
+width:13px;
+height:15px;`;
