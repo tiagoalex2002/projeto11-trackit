@@ -25,7 +25,7 @@ export default function Login(){
         setInvalido(true)
         const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: senha}); 
         requisition.then((response) => {navigate("/hoje");
-        setToken(response.token);
+        setToken(response.data.token);
         setInvalido(false)})
         requisition.catch((response) =>{
             alert("Usuário não encontrado, tente novamente")

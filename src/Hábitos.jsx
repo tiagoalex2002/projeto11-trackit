@@ -30,6 +30,8 @@ export default function Hábitos(props){
     const {setDays}= useContext(HabitsContext)
     const [invalido,setInvalido]= useState(false)
 
+    console.log(token)
+
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",{
         headers: { Authorization: `Bearer ${token}` }
     }); promise.then((response)=>{setHabitos(response.data)})})
@@ -58,8 +60,10 @@ export default function Hábitos(props){
     function ReqHábito(event){
         event.preventDefault();
         setInvalido(true)
+        const body= { name: name, days: days }
+        console.log(body)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", 
-        { name: name, days: days }, {
+        body, {
             headers: { Authorization: `Bearer ${token}` }
         });
         request.then((response) => {setInvalido(false);
@@ -78,13 +82,13 @@ export default function Hábitos(props){
             </First>
             <div>{habitos.map((i)=> <Habits><Name>{i.name}</Name><div>{dias.map((j)=> <Dias2 numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div></Habits>)}</div>
             <ContainerAdd>
-                <Add data-test="habit-create-container" add={props.add}>
-                    <form onSubmit={ReqHábito}>
+                <Add onSubmit={ReqHábito} data-test="habit-create-container" add={props.add}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text" required value={name} onChange={e => setName(e.target.value)}/>
-                      <ContainerButton>{dias.map((i) => <Dias disabled={invalido} days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
-                      <Cancelar disabled={invalido} data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
-                      <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
-                    </form>
+                      <ContainerButton>{dias.map((i) => <Dias type="button" disabled={invalido} days={days} data-test="habit-day" numero={i.number}  onClick={() =>DaySelection(i)}>{i.dia}</Dias>)}</ContainerButton>
+                      <Rizz>
+                         <Cancelar disabled={invalido} data-test="habit-create-cancel-btn" onClick={Cancel}>Cancelar</Cancelar>
+                         <Salvar disabled={invalido} data-test="habit-create-save-btn" type="submit">{invalido? <ThreeDots/>:"Salvar"} </Salvar>
+                      </Rizz>
                 </Add>
             </ContainerAdd>
             <Text2 habitos={habitos}>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text2>
@@ -202,7 +206,7 @@ line-height: 22px;
 text-align: center;
 color: #52B6FF;`;
 
-const Add= styled.div `
+const Add= styled.form `
 width: 340px;
 height: 180px;
 background: #FFFFFF;
