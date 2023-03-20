@@ -115,7 +115,7 @@ export default function Hoje(){
                 <Text1 data-test="today">{dia}, {hoje}/{month}</Text1>
             </First>
             <Text2 data-test="today-counter">{today.length ===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
-            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={Finished} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
+            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={()=>Finished(h)} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
