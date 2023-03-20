@@ -96,8 +96,22 @@ export default function Hoje(){
     }); promise.then((response)=>{setToday(response.data)})})
 
     function Finished(index){
-        setDone([...done,index.id])
-        setPercentage((done.length/today.length)* 100)
+        const body={}
+        if(done.includes(index.number)){
+            const req=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}/uncheck`,body,{headers: { Authorization: `Bearer ${token}` }})
+            req.then((res)=>{console.log(done)
+                let h=done.indexOf(index.number)
+                done.splice(h,1)
+                console.log("oi")
+                setDone(done)})
+            req.catch((error)=> alert(error.response.data.message))
+        }
+        else{
+            const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}/check`,body,{headers: { Authorization: `Bearer ${token}` }} )
+            request.then((response)=> {setDone([...done,index.id]);
+            setPercentage((done.length/today.length)* 100)} )
+            request.catch((error) => alert(error.response.data.message))
+        }
     }
 
 
