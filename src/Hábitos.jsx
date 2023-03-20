@@ -93,7 +93,7 @@ export default function Hábitos(props){
                 <Text1>Meus hábitos</Text1>
                 <button data-test="habit-create-btn"  onClick={Addition}>+</button>
             </First>
-            <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div><Icon onClick={(i)=> Delete(i)}data-test="habit-delete-btn"><ion-icon name="trash-outline"></ion-icon></Icon></Habits>)}</div>
+            <div>{habitos.map((i)=> <Habits data-test="habit-container"><Name data-test="habit-name">{i.name}</Name><div>{dias.map((j)=> <Dias2 data-test="habit-day" numero={j.number} selecionados={i.days}>{j.dia}</Dias2>)}</div><Icon onClick={()=> Delete(i)}data-test="habit-delete-btn"><ion-icon name="trash-outline"></ion-icon></Icon></Habits>)}</div>
             <ContainerAdd>
                 <Add onSubmit={ReqHábito} data-test="habit-create-container" add={props.add}>
                       <input disabled={invalido} data-test="habit-name-input" placeholder="nome do hábito" type="text"  value={name} onChange={e => setName(e.target.value)}/>

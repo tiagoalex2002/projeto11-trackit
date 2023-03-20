@@ -94,7 +94,8 @@ export default function Hoje(){
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
         headers: { Authorization: `Bearer ${token}` }
     }); promise.then((response)=>{setToday(response.data)})})
-
+    
+    let math;
     function Finished(index){
         const body={}
         if(done.includes(index.id)){
@@ -102,14 +103,16 @@ export default function Hoje(){
             req.then((res)=>{console.log(done)
                 let h=done.indexOf(index.id)
                 done.splice(h,1)
-                console.log("oi")
+                math=((done.length/today.length) * 100);
+                setPercentage(math)
                 setDone(done)})
             req.catch((error)=> alert(error.response.data.message))
         }
         else{
             const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}/check`,body,{headers: { Authorization: `Bearer ${token}` }} )
             request.then((response)=> {setDone([...done,index.id]);
-            setPercentage((done.length/today.length)* 100)} )
+            math=((done.length/today.length) * 100);
+            setPercentage(math)} )
             request.catch((error) => alert(error.response.data.message))
         }
     }
@@ -128,7 +131,7 @@ export default function Hoje(){
             <First>
                 <Text1 data-test="today">{dia}, {hoje}/{month}</Text1>
             </First>
-            <Text2 data-test="today-counter">{today.length ===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
+            <Text2 data-test="today-counter">{done.length ===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
             <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1 sequencia={h.currentSequence} record={h.highestSequence}><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={()=>Finished(h)} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
