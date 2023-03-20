@@ -14,6 +14,7 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { useEffect } from "react";
 import HabitsContext from "./Contexts/HabitsContext";
+import TodayContext from "./Contexts/TodayContext";
 
 export default function Hábitos(props){
 
@@ -29,6 +30,7 @@ export default function Hábitos(props){
     const {days}= useContext(HabitsContext)
     const {setDays}= useContext(HabitsContext)
     const [invalido,setInvalido]= useState(false)
+    const {percentage}= useContext(TodayContext)
 
    
 
@@ -109,7 +111,7 @@ export default function Hábitos(props){
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
             <Container data-test="today-link" > 
-             <Link to="/hoje"><CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
+             <Link to="/hoje"><CircularProgressbar value={percentage} text={`Hoje`} background  backgroundPadding={6}
              styles={buildStyles({
              backgroundColor: "#3e98c7",
              textColor: "#fff",

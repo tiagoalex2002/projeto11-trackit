@@ -141,7 +141,7 @@ export default function Hoje(){
                 <Text1 data-test="today">{dia}, {hoje}/{month}</Text1>
             </First>
             <Text2 data-test="today-counter">{n===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
-            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1 sequencia={h.currentSequence} record={h.highestSequence}><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={()=>Finished(h)} concluded={h.done} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
+            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1 concluded={h.done} done={done} numb={h.id} sequencia={h.currentSequence} record={h.highestSequence}><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={()=>Finished(h)} concluded={h.done} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
@@ -279,7 +279,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 12.976px;
 line-height: 16px;
-color: ${props => props.sequencia === props.record? "#8FC549": "#666666"};`;
+color: ${props => (props.done.includes(props.numb) || props.concluded) && props.sequencia === props.record? "#8FC549": "#666666"};`;
 
 const Check= styled.div `
 box-sizing: border-box;

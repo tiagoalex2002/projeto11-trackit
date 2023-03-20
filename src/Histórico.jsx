@@ -7,11 +7,13 @@ import {
   } from "react-circular-progressbar";
    import "react-circular-progressbar/dist/styles.css";
 import UserContext from "./Contexts/UserContext"
+import TodayContext from "./Contexts/TodayContext";
 import { useContext } from "react"
 
 export default function Histórico(){
 
     const {profile}= useContext(UserContext)
+    const {percentage}= useContext(TodayContext)
 
     return(
         <div>
@@ -28,7 +30,7 @@ export default function Histórico(){
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
             <Container data-test="today-link"> 
-             <Link to="/hoje"><CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
+             <Link to="/hoje"><CircularProgressbar value={percentage} text={`Hoje`} background  backgroundPadding={6}
              styles={buildStyles({
              backgroundColor: "#3e98c7",
              textColor: "#fff",
