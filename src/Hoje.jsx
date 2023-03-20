@@ -17,14 +17,12 @@ export default function Hoje(){
     const date= new Date()
     const hoje= date.getDate()
     const mes= date.getMonth() + 1;
-    console.log(hoje);
-    console.log(mes)
+    
     const timeElapsed= Date.now()
     const tod= new Date(timeElapsed)
     const dat= tod.toDateString();
     console.log(dat);
     var weekday= tod.getDay()
-    console.log(weekday)
     let dia;
     let month;
     if(weekday==0){
@@ -92,14 +90,23 @@ export default function Hoje(){
     const {percentage}= useContext(TodayContext)
     const {setPercentage}= useContext(TodayContext)
 
-    console.log(done)
 
 
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
         headers: { Authorization: `Bearer ${token}` }
-    }); promise.then((response)=>{setToday(response.data)})})
+    }); promise.then((response)=>{setToday(response.data); console.log(today)})})
+
+    let n=0
+    for(let i=0; i< today.length; i++){
+        if(today[i].done){
+            n= n+1;
+        }
+    }
+
+    console.log(n);
     
-    let math;
+    let math= ((n/today.length) * 100);
+    setPercentage(math);
     function Finished(index){
         const body={}
         if(index.done){
@@ -107,7 +114,6 @@ export default function Hoje(){
             req.then((res)=>{console.log(done)
                 let h=done.indexOf(index.id)
                 done.splice(h,1)
-                math=((done.length/today.length) * 100);
                 setPercentage(math)
                 setDone(done)})
             req.catch((error)=> alert(error.response.data.message))
@@ -115,7 +121,6 @@ export default function Hoje(){
         else{
             const request=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}/check`,body,{headers: { Authorization: `Bearer ${token}` }} )
             request.then((response)=> {setDone([...done,index.id]);
-            math=((done.length/today.length) * 100);
             setPercentage(math)} )
             request.catch((error) => alert(error.response.data.message))
         }
@@ -124,7 +129,7 @@ export default function Hoje(){
 
 
 
-    
+    console.log(math)
     return(
         <div>
         <Header data-test="header">
@@ -135,7 +140,7 @@ export default function Hoje(){
             <First>
                 <Text1 data-test="today">{dia}, {hoje}/{month}</Text1>
             </First>
-            <Text2 data-test="today-counter">{done.length ===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
+            <Text2 data-test="today-counter">{n===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
             <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1 sequencia={h.currentSequence} record={h.highestSequence}><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={()=>Finished(h)} concluded={h.done} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
