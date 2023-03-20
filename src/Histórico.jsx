@@ -28,7 +28,7 @@ export default function Histórico(){
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
             <Container data-test="today-link"> 
-             <CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
+             <Link to="/hoje"><CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
              styles={buildStyles({
              backgroundColor: "#3e98c7",
              textColor: "#fff",
@@ -37,7 +37,7 @@ export default function Histórico(){
              width: "91px",
              height: "91px"
               })}
-      /></Container>
+      /></Link></Container>
            <Link  data-test="history-link"  to="/historico"><Text3>Histórico</Text3></Link>
         </Footer>
 
