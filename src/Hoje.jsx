@@ -192,17 +192,20 @@ button{
     text-align: center;
     color: #FFFFFF;
     margin-left:82%;
-}`
+}
+margin-left:17px;
+`
 
 const Text1=styled.div `
-width: 148px;
+width: 180px;
 height: 29px;
 font-family: 'Lexend Deca';
 font-style: normal;
 font-weight: 400;
 font-size: 22.976px;
 line-height: 29px;
-color: #126BA5;`;
+color: #126BA5;
+margin-top:30px;`;
 
 const Text2= styled.div `
 width: 338px;
@@ -214,7 +217,8 @@ font-weight: 400;
 font-size: 17.976px;
 line-height: 22px;
 
-color: #666666;`;
+color: #666666;
+margin-left:17px`;
 
 const Footer=styled.footer `
 display:flex;
@@ -250,12 +254,15 @@ height: 94px;
 background: #FFFFFF;
 border-radius: 5px;
 display:flex;
-flex-direction:row;`
+flex-direction:column;
+margin-left:17px;
+margin-top:13px;`
 
 const Habito1=styled.div `
 width: 146px;
 height: 32px;
 font-family: 'Lexend Deca';
+margin-left:15px;
 font-style: normal;
 font-weight: 400;
 font-size: 12.976px;
@@ -269,7 +276,10 @@ width: 69px;
 height: 69px;
 background: ${props => props.done.includes(props.numb)? "#8FC549" : "#EBEBEB"};
 border: 1px solid #E7E7E7;
-border-radius: 5px;`;
+border-radius: 5px;
+margin-left:258px;
+margin-top:13px;`
+;
 
 const Titulo= styled.div `
 width: 208px;
@@ -279,4 +289,6 @@ font-style: normal;
 font-weight: 400;
 font-size: 19.976px;
 line-height: 25px;
-color: #666666;`
+color: #666666;
+margin-top:13px;
+margin-left:17px;`
