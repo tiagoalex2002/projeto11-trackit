@@ -97,10 +97,10 @@ export default function Hoje(){
 
     function Finished(index){
         const body={}
-        if(done.includes(index.number)){
+        if(done.includes(index.id)){
             const req=axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}/uncheck`,body,{headers: { Authorization: `Bearer ${token}` }})
             req.then((res)=>{console.log(done)
-                let h=done.indexOf(index.number)
+                let h=done.indexOf(index.id)
                 done.splice(h,1)
                 console.log("oi")
                 setDone(done)})
