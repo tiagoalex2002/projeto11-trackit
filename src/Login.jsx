@@ -16,6 +16,7 @@ export default function Login(){
     const {senha} = useContext(UserContext)
     const {setSenha}= useContext(UserContext)
     const {setToken}= useContext(UserContext)
+    const {setProfile}= useContext(UserContext)
     const [invalido,setInvalido]= useState(false)
 
     const navigate = useNavigate()
@@ -26,6 +27,7 @@ export default function Login(){
         const requisition= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", { email: email, password: senha}); 
         requisition.then((response) => {navigate("/hoje");
         setToken(response.data.token);
+        setProfile(response.data.image)
         setInvalido(false)})
         requisition.catch((response) =>{
             alert("Usuário não encontrado, tente novamente")

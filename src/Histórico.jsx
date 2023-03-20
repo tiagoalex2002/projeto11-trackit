@@ -11,13 +11,13 @@ import { useContext } from "react"
 
 export default function Histórico(){
 
-    const {foto}= useContext(UserContext)
+    const {profile}= useContext(UserContext)
 
     return(
         <div>
         <Header data-test="header">
             <Title>TrackIt</Title>
-            <img src={foto} alt="perfil"/>
+            <img src={profile} alt="perfil"/>
         </Header>
         <Body>
             <First>

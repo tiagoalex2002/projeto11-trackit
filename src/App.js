@@ -24,7 +24,8 @@ export default function App() {
     const [information, setInformation]= useState([])
     const [done,setDone]= useState([])
     const [percentage, setPercentage]= useState(0)
-    const UserValue= {email: email, setEmail: setEmail,nome: nome, setNome: setNome,foto: foto, setFoto : setFoto,senha: senha,setSenha: setSenha,token: token,setToken: setToken}
+    const [profile,setProfile]= useState("")
+    const UserValue= {email: email, setEmail: setEmail,nome: nome, setNome: setNome,foto: foto, setFoto : setFoto,senha: senha,setSenha: setSenha,token: token,setToken: setToken, profile: profile, setProfile: setProfile}
     const HabitsValue={habitos:habitos,setHabitos: setHabitos, name: name, setName: setName, days: days, setDays:setDays}
     const TodayValue={today: today, setToday: setToday, information: information, setInformation: setInformation, done: done, setDone: setDone, percentage: percentage, setPercentage: setPercentage}
     

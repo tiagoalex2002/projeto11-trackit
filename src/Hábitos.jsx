@@ -20,7 +20,7 @@ export default function Hábitos(props){
     const {habitos}= useContext(HabitsContext)
     const {setHabitos}= useContext(HabitsContext)
 
-    const {foto}= useContext(UserContext)
+    const {profile}= useContext(UserContext)
 
     const {token} = useContext(UserContext)
 
@@ -85,7 +85,7 @@ export default function Hábitos(props){
     <div>
         <Header data-test="header">
             <Title>TrackIt</Title>
-            <img src={foto} alt="perfil"/>
+            <img src={profile} alt="perfil"/>
         </Header>
         <Body >
             <First>

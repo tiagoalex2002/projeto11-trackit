@@ -79,7 +79,7 @@ export default function Hoje(){
 
 
 
-    const {foto}= useContext(UserContext);
+    const {profile}= useContext(UserContext);
     const {token}= useContext(UserContext);
     const {today}= useContext(TodayContext)
     const {setToday}= useContext(TodayContext)
@@ -122,7 +122,7 @@ export default function Hoje(){
         <div>
         <Header data-test="header">
             <Title>TrackIt</Title>
-            <img src={foto} alt="perfil"/>
+            <img src={profile} alt="perfil"/>
         </Header>
         <Body>
             <First>
