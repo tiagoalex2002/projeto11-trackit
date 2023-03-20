@@ -85,11 +85,22 @@ export default function Hoje(){
     const {setToday}= useContext(TodayContext)
     const {information} = useContext(TodayContext)
     const {setInformation}= useContext(TodayContext)
+    const {done}= useContext(TodayContext)
+    const {setDone}= useContext(TodayContext)
+    const {percentage}= useContext(TodayContext)
+    const {setPercentage}= useContext(TodayContext)
 
 
     useEffect(()=> {const promise=axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
         headers: { Authorization: `Bearer ${token}` }
     }); promise.then((response)=>{setToday(response.data)})})
+
+    function Finished(index){
+        setDone([...done,index.id])
+        setPercentage((done.length/today.length)* 100)
+    }
+
+
 
 
     
@@ -103,13 +114,13 @@ export default function Hoje(){
             <First>
                 <Text1 data-test="today">{dia}, {hoje}/{month}</Text1>
             </First>
-            <Text2 data-test="today-counter">Nenhum hábito concluído ainda</Text2>
-            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
+            <Text2 data-test="today-counter">{today.length ===0 ? "Nenhum hábito concluído ainda" : `${percentage}% dos hábitos concluídos`}</Text2>
+            <div>{today.map((h)=>(<Habito data-test="today-habit-container"><Titulo data-test="today-habit-name">{h.name}</Titulo><Habito1><div data-test="today-habit-sequence">Sequência atual:{h.currentSequence} dias</div><div data-test="today-habit-record">Seu recorde: {h.highestSequence} dias</div></Habito1><Check onClick={Finished} done={done} numb={h.id} data-test="today-habit-check-btn"><ion-icon name="checkmark-outline"></ion-icon></Check></Habito>))}</div>
         </Body>
         <Footer data-test="menu">
             <Link  data-test="habit-link" to="/habitos"><Text3>Hábitos</Text3></Link>
             <Container data-test="today-link"> 
-             <CircularProgressbar value={67} text={`Hoje`} background  backgroundPadding={6}
+             <CircularProgressbar value={percentage} text={`Hoje`} background  backgroundPadding={6}
              styles={buildStyles({
              backgroundColor: "#3e98c7",
              textColor: "#fff",
@@ -242,7 +253,7 @@ box-sizing: border-box;
 position: absolute;
 width: 69px;
 height: 69px;
-background: #EBEBEB;
+background: ${props => props.done.includes(props.numb)? "#8FC549" : "#EBEBEB"};
 border: 1px solid #E7E7E7;
 border-radius: 5px;`;
 
