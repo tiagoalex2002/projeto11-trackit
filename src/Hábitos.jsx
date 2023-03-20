@@ -79,6 +79,7 @@ export default function Hábitos(props){
         if( window.confirm("Você quer mesmo excluir esse hábito da sua rotina?")){
             const promise=axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${index.id}`,top)
             promise.then((response)=> setHabitos(habitos.filter(item=> item.id !== index.id)))
+            promise.catch((error)=> alert(error.response.data.message))
         }
     }
     return(
